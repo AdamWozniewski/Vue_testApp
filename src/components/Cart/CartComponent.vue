@@ -17,7 +17,6 @@
             }
         },
         created: function() {
-            console.log(this.series)
         },
         mounted : function() {
             this.target = Highcharts.chart(this.$el, {

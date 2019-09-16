@@ -41,15 +41,10 @@
         props : [
             'src'
         ],
-        created: function () {
-            console.log(this.src)
-        },
         data () {
             return {
                 sideMenuitems: [
-                    { title: 'Dashboard', icon: 'mdi-view-dashboard' },
-                    { title: 'Photos', icon: 'mdi-image' },
-                    { title: 'Logout', icon: 'mdi-help-box' },
+                    { title: 'Logout', icon: 'mdi-cancel' },
                 ],
                 right: null,
             }
