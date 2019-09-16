@@ -1,28 +1,50 @@
 <template>
-  <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
-  </div>
+  <v-app>
+    <v-content>
+      <sidebar :src="this.sidebarElements" />
+      <chart-view-component :series="initSeries"></chart-view-component>
+    </v-content>
+  </v-app>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import ChartViewComponent from './components/Cart/ChartViewComponent';
+import Sidebar from "./components/Sidebar/Sidebar";
+import data from './static/data';
+// import axios from 'axios';
 
 export default {
-  name: 'app',
+  name: 'App',
   components: {
-    HelloWorld
-  }
-}
-</script>
+    ChartViewComponent,
+    Sidebar
+  },
 
-<style>
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-</style>
+  data: () => ({
+    sidebarElements: data,
+  }),
+  created: function () {
+    // axios.get('http://static.fundconnect.com/data.json').then(data => console.log(data))
+  },
+  methods: {
+
+  },
+  computed : {
+    initSeries : function() {
+      return [{
+        name: 'Tokyo',
+        data: [7.0, 6.9, 9.5, 14.5, 18.2, 21.5, 25.2, 26.5, 23.3, 18.3, 13.9, 9.6]
+      }, {
+        name: 'New York',
+        data: [-0.2, 0.8, 5.7, 11.3, 17.0, 22.0, 24.8, 24.1, 20.1, 14.1, 8.6, 2.5]
+      }, {
+        name: 'Berlin',
+        data: [-0.9, 0.6, 3.5, 8.4, 13.5, 17.0, 18.6, 17.9, 14.3, 9.0, 3.9, 1.0]
+      }, {
+        name: 'London',
+        data: [3.9, 4.2, 5.7, 8.5, 11.9, 15.2, 17.0, 16.6, 14.2, 10.3, 6.6, 4.8]
+      }];
+    }
+  }
+};
+</script>
