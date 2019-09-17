@@ -3,22 +3,27 @@ export default function makeUser(initialConfig = {}) {
     const namespaced = true;
 
     const defaultState = {
-        user: {
-            login: 'adamW',
-        },
+        login: '',
+        isAuth: false,
     };
 
     const getters = {};
 
     const mutations = {
-        setUser: (state, user) => {
-            state.user = user;
+        setUser: (state, login) => {
+            state.login = login;
+        },
+        setAuth: (state, isAuth) => {
+            state.isAuth = isAuth;
         },
     };
 
     const actions = {
-        storeItems: ({ commit }, user) => {
-            commit('setUser', user);
+        storeUser: ({ commit }, login) => {
+            commit('setUser', login);
+        },
+        storeIsAuth: ({ commit }, isAuth) => {
+            commit('setAuth', isAuth);
         },
     };
 

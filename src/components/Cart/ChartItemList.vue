@@ -26,7 +26,7 @@
 
 <script>
     import { mapActions } from 'vuex';
-    import { ITEMS } from '../../store/namespaces';
+    import { ITEMS } from './../../store/namespaces';
 
     export default {
         name: "ChartItemList",
@@ -42,6 +42,7 @@
         methods: {
             ...mapActions(ITEMS, ['storeItem']),
             setStoreItem: function (item) {
+                console.log(item)
                 this.storeItem(item);
             },
         },

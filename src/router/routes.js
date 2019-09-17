@@ -6,7 +6,7 @@ import ChartViewComponent from "../components/Views/ChartViewComponent";
 const routes = [
     {
         path: '*',
-        redirect: '/',
+        redirect: '/dashboard',
     }, {
         path: '/dashboard',
         name: 'dashboard',

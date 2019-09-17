@@ -11,7 +11,7 @@
                         Data chart
                     </v-list-item-title>
                     <v-list-item-subtitle>
-                        {{ this.user.login }}
+                        {{ this.login }}
                     </v-list-item-subtitle>
                 </v-list-item-content>
             </v-list-item>
@@ -38,7 +38,7 @@
 
 <script>
     import { mapState, mapActions } from 'vuex';
-    import { USER } from './../../store/namespaces';
+    import { USER, CORE } from './../../store/namespaces';
 
     export default {
         name: "Sidebar",
@@ -51,12 +51,21 @@
             }
         },
         methods: {
+            ...mapActions(USER, ['storeIsAuth', 'storeUser']),
+            ...mapActions(CORE, ['storeShow']),
             logout: function () {
-                // this.$router.push('login');
+                this.storeShow({
+                    visible: true,
+                    color: 'success',
+                    text: 'Logout successful',
+                });
+                this.storeIsAuth(false);
+                this.storeUser('');
+                this.$router.push('login');
             }
         },
         computed: {
-            ...mapState(USER, ['user'])
+            ...mapState(USER, ['login']),
         }
     }
 </script>

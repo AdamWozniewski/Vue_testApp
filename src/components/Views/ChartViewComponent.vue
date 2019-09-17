@@ -12,7 +12,7 @@
     import ChartPieComponent from '../Cart/ChartPieComponent';
     import ChartItemList from '../Cart/ChartItemList';
     import { mapState, mapActions } from 'vuex';
-    import { ITEMS } from '../../store/namespaces';
+    import { ITEMS, USER } from '../../store/namespaces';
     import Sidebar from "../Sidebar/Sidebar";
     import data from "../../static/data";
 
@@ -27,7 +27,6 @@
         props : {
             series : {
                 type: Array,
-                required: true
             }
         },
         data: function () {
@@ -35,10 +34,12 @@
                 sidebarElements: data,
             }
         },
+        created: function () {
+            if (!this.isAuth) this.$router.push('login');
+        },
         computed: {
-            ...mapState(ITEMS, [
-                'listItems'
-            ]),
+            ...mapState(ITEMS, ['listItems']),
+            ...mapState(USER, ['isAuth']),
             initSeries : function() {
                 return [{
                     name: 'Tokyo',
@@ -56,9 +57,7 @@
             }
         },
         methods: {
-            ...mapActions(ITEMS, [
-                'storeItems',
-            ]),
+            ...mapActions(ITEMS, ['storeItems']),
         }
     }
 </script>

@@ -27,7 +27,7 @@
 
 <script>
     import { mapActions } from 'vuex';
-    import { CORE } from '../../store/namespaces';
+    import { CORE, USER } from './../../store/namespaces';
 
     export default {
         name: "LoginView",
@@ -39,14 +39,17 @@
         }),
         methods: {
             ...mapActions(CORE, ['storeShow']),
+            ...mapActions(USER, ['storeIsAuth', 'storeUser']),
             submit () {
                 if (this.login === 'adam' && this.password === '123') {
-                    this.$router.push('dashboard');
                     this.storeShow({
                         visible: true,
                         color: 'success',
                         text: 'Login successful',
                     });
+                    this.storeIsAuth(true);
+                    this.storeUser(this.login);
+                    this.$router.push('dashboard');
                 } else this.storeShow({
                     visible: true,
                     color: 'error',

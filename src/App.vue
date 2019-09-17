@@ -8,13 +8,12 @@
 </template>
 
 <script>
+  import Snackbar from './components/Core/Snackbar';
 
-import Snackbar from './components/Core/Snackbar';
-
-export default {
-  name: 'App',
-  components: {
-    Snackbar,
-  },
-};
+  export default {
+    name: 'App',
+    components: {
+      Snackbar,
+    },
+  };
 </script>
