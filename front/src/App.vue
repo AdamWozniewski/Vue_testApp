@@ -1,7 +1,7 @@
 <template>
   <v-app>
     <v-content>
-      <snackbar />
+<!--      <snackbar />-->
       <router-view></router-view>
     </v-content>
   </v-app>
@@ -9,7 +9,6 @@
 
 <script>
   import Snackbar from './components/Core/Snackbar';
-
   export default {
     name: 'App',
     components: {

@@ -30,16 +30,15 @@
             createDiagram: function (series) {
                 this.target = Highcharts.chart(this.$el, {
                     title: {
-                        text: 'Allocation Country',
+                        text: 'Performance',
                         x: -20 //center
                     },
                     xAxis: {
-                        categories: ['10', '20', '30', '40', '50', '60',
-                            '70', '80', '90', '10']
+                        categories: series.map(({ name }) => name),
                     },
                     yAxis: {
                         title: {
-                            text: 'Year'
+                            text: 'Value'
                         },
                         plotLines: [{
                             value: 0,

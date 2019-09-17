@@ -37,7 +37,7 @@
                       type: 'pie'
                   },
                   title: {
-                      text: 'Allocation Region'
+                      text: 'Allocation Country'
                   },
                   tooltip: {
                       pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'

@@ -65,6 +65,7 @@
 
 <script>
     import { mapActions } from 'vuex';
+    import axios from 'axios';
     import { CORE, USER } from './../../store/namespaces';
 
     export default {
@@ -89,6 +90,10 @@
             ...mapActions(CORE, ['storeShow']),
             ...mapActions(USER, ['storeIsAuth', 'storeUser']),
             submit () {
+                axios.post('http://localhost:3001/auth/login', {
+                    login: this.login,
+                    password: this.password,
+                });
                 if (this.login === 'adam' && this.password === '123') {
                     this.storeShow({
                         visible: true,
