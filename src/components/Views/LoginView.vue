@@ -1,28 +1,66 @@
 <template>
-    <v-form v-model="valid">
-        <v-container>
-            <v-row>
-                <v-col cols="12" md="4">
-                    <v-text-field
-                        v-model="login"
-                        @input="changeButtonDisabled"
-                        label="Login"
-                        required
-                    ></v-text-field>
-                </v-col>
-                <v-col cols="12" md="4">
-                    <v-text-field
-                        v-model="password"
-                        @input="changeButtonDisabled"
-                        label="Password"
-                        required
-                        type="password"
-                    ></v-text-field>
-                </v-col>
-            </v-row>
-        </v-container>
-        <v-btn class="mr-4" @click="submit" :disabled="disabled">submit</v-btn>
-    </v-form>
+    <v-card
+        class="mx-auto"
+        :flat="flat"
+        :loading="loading"
+        :outlined="outlined"
+        :elevation="elevation"
+        :raised="raised"
+        :width="width"
+        :height="height"
+    >
+        <v-img
+            v-if="media"
+            class="white--text"
+            height="200px"
+            src="https://cdn.vuetifyjs.com/images/cards/docks.jpg"
+        >
+        <v-card-title class="align-end fill-height">Data Viever</v-card-title>
+        </v-img>
+        <v-card-title v-else>I'm a title</v-card-title>
+
+        <v-card-text>I'm card text</v-card-text>
+        <v-card-actions v-if="actions">
+            <v-form v-model="valid">
+                <v-container>
+                    <v-row>
+                        <v-col cols="12">
+                            <v-text-field
+                                v-model="login"
+                                @input="changeButtonDisabled"
+                                label="Login"
+                                required
+                            ></v-text-field>
+                        </v-col>
+                        <v-col cols="12">
+                            <v-text-field
+                                v-model="password"
+                                @input="changeButtonDisabled"
+                                label="Password"
+                                required
+                                type="password"
+                            ></v-text-field>
+                        </v-col>
+                    </v-row>
+                </v-container>
+                <v-container>
+                    <v-row>
+                        <v-col cols="12">
+                            <v-btn
+                                block
+                                class="mr-4"
+                                @click="submit"
+                                :disabled="disabled"
+                            >
+                                submit
+                            </v-btn>
+                        </v-col>
+                    </v-row>
+                </v-container>
+            </v-form>
+        </v-card-actions>
+    </v-card>
+
 </template>
 
 <script>
@@ -36,6 +74,16 @@
             login: '',
             password: '',
             disabled: true,
+
+            flat: false,
+            media: true,
+            loading: false,
+            actions: true,
+            outlined: false,
+            elevation: 10,
+            raised: false,
+            width: 344,
+            height: undefined,
         }),
         methods: {
             ...mapActions(CORE, ['storeShow']),

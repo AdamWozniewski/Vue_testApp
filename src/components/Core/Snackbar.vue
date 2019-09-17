@@ -40,9 +40,18 @@
             ...mapActions(CORE, ['storeShow']),
             closeSnackbar: function () {
                 this.storeShow({
-                    visible: false
+                    visible: false,
                 });
             },
+        },
+        watch: {
+            show: function (val) {
+                if(this.show.visible === false) {
+                    this.storeShow({
+                        visible: false,
+                    });
+                }
+            }
         }
     }
 </script>

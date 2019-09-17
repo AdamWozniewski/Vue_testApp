@@ -1,9 +1,5 @@
-<template>
-    <v-card
-        height="400"
-        width="256"
-        class="mx-auto"
-    >
+<template>s
+    <v-card height="100%" width="200px">
         <v-navigation-drawer permanent>
             <v-list-item>
                 <v-list-item-content>

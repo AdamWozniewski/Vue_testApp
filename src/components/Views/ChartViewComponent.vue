@@ -1,20 +1,26 @@
 <template>
-    <div>
-        <sidebar />
-        <cart-component :series="initSeries"></cart-component>
-        <chart-pie-component :series="initSeries"></chart-pie-component>
+    <div class="chartViewComponent__container">
+        <div class="chartViewComponent__sidebar-container">
+            <sidebar />
+        </div>
+        <div class="chartViewComponent__charts">
+            <cart-component :series="initSeriesAlocationCountry"></cart-component>
+            <chart-pie-component :series="initSeriesAllocationRegion"></chart-pie-component>
+        </div>
         <chart-item-list :listItems="sidebarElements"></chart-item-list>
     </div>
+    <footer-component />
 </template>
 
 <script>
+    import { mapState, mapActions } from 'vuex';
     import CartComponent from '../Cart/CartComponent';
     import ChartPieComponent from '../Cart/ChartPieComponent';
     import ChartItemList from '../Cart/ChartItemList';
-    import { mapState, mapActions } from 'vuex';
-    import { ITEMS, USER } from '../../store/namespaces';
-    import Sidebar from "../Sidebar/Sidebar";
-    import data from "../../static/data";
+    import FooterComponent from "./../Core/FooterComponent";
+    import { ITEMS, USER } from './../../store/namespaces';
+    import Sidebar from "./../Sidebar/Sidebar";
+    import data from "./../../static/data";
 
     export default {
         name: 'ChartViewComponent',
@@ -23,11 +29,7 @@
             CartComponent,
             ChartPieComponent,
             Sidebar,
-        },
-        props : {
-            series : {
-                type: Array,
-            }
+            FooterComponent,
         },
         data: function () {
             return {
@@ -38,26 +40,39 @@
             if (!this.isAuth) this.$router.push('login');
         },
         computed: {
-            ...mapState(ITEMS, ['listItems']),
+            ...mapState(ITEMS, ['listItems', 'selectedItem']),
             ...mapState(USER, ['isAuth']),
-            initSeries : function() {
-                return [{
-                    name: 'Tokyo',
-                    data: [7.0, 6.9, 9.5, 14.5, 18.2, 21.5, 25.2, 26.5, 23.3, 18.3, 13.9, 9.6]
-                }, {
-                    name: 'New York',
-                    data: [-0.2, 0.8, 5.7, 11.3, 17.0, 22.0, 24.8, 24.1, 20.1, 14.1, 8.6, 2.5]
-                }, {
-                    name: 'Berlin',
-                    data: [-0.9, 0.6, 3.5, 8.4, 13.5, 17.0, 18.6, 17.9, 14.3, 9.0, 3.9, 1.0]
-                }, {
-                    name: 'London',
-                    data: [3.9, 4.2, 5.7, 8.5, 11.9, 15.2, 17.0, 16.6, 14.2, 10.3, 6.6, 4.8]
-                }];
-            }
+            initSeriesAlocationCountry: function () {
+                if ('value' in this.selectedItem) {
+                    const { AllocationCountry } = this.selectedItem.value;
+                    return AllocationCountry.map(item => ({
+                        name: item.Key, data: [0, item.Value]}));
+                }
+                return [];
+            },
+            initSeriesAllocationRegion: function () {
+                if ('value' in this.selectedItem) {
+                    const { AllocationRegion } = this.selectedItem.value;
+                    return AllocationRegion.map(item => ({
+                        name: item.Key, y: item.Value}));
+                }
+                return [];
+            },
         },
         methods: {
             ...mapActions(ITEMS, ['storeItems']),
-        }
+        },
     }
 </script>
+
+<style scoped>
+    .chartViewComponent__container {
+        display: flex;
+        flex-wrap: nowrap;
+        height: 100%;
+    }
+    .chartViewComponent__sidebar-container {
+        width: 30%;
+        height: 100%;
+    }
+</style>

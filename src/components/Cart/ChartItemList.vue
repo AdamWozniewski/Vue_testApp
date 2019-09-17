@@ -1,6 +1,6 @@
 <template>
     <v-card
-        class="mx-auto"
+        class="mx-right chartItemList__container"
         max-width="300"
         tile
     >
@@ -25,7 +25,7 @@
 </template>
 
 <script>
-    import { mapActions } from 'vuex';
+    import { mapActions, mapState } from 'vuex';
     import { ITEMS } from './../../store/namespaces';
 
     export default {
@@ -42,13 +42,22 @@
         methods: {
             ...mapActions(ITEMS, ['storeItem']),
             setStoreItem: function (item) {
-                console.log(item)
                 this.storeItem(item);
             },
         },
+        computed: {
+            ...mapState(ITEMS, ['selectedItem']),
+        },
+        watch: {
+            selectedItem: function (val) {
+                // console.log(val)
+            }
+        }
     }
 </script>
 
 <style scoped>
-
+    .chartItemList__container {
+        margin-right: 0;
+    }
 </style>
