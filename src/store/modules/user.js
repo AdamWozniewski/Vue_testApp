@@ -1,29 +1,24 @@
 /* eslint-disable no-param-reassign */
-export default function makeListItems(initialConfig = {}) {
+export default function makeUser(initialConfig = {}) {
     const namespaced = true;
 
     const defaultState = {
-        listItems: [],
-        selectedItem: {},
+        user: {
+            login: 'adamW',
+        },
     };
 
     const getters = {};
 
     const mutations = {
-        setItems: (state, items) => {
-            state.listItems = items;
-        },
-        setItem: (state, item) => {
-            state.selectedItem = item;
+        setUser: (state, user) => {
+            state.user = user;
         },
     };
 
     const actions = {
-        storeItems: ({ commit }, items) => {
-            commit('setItems', items);
-        },
-        storeItem: ({ commit }, item) => {
-            commit('setItem', item);
+        storeItems: ({ commit }, user) => {
+            commit('setUser', user);
         },
     };
 

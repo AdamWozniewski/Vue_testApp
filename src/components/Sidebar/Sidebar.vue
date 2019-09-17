@@ -11,7 +11,7 @@
                         Data chart
                     </v-list-item-title>
                     <v-list-item-subtitle>
-                        subtext
+                        {{ this.user.login }}
                     </v-list-item-subtitle>
                 </v-list-item-content>
             </v-list-item>
@@ -21,6 +21,7 @@
                     v-for="item in this.sideMenuitems"
                     :key="item.title"
                     link
+                    @click="logout"
                 >
                     <v-list-item-icon>
                         <v-icon>{{ item.icon }}</v-icon>
@@ -36,11 +37,11 @@
 </template>
 
 <script>
+    import { mapState, mapActions } from 'vuex';
+    import { USER } from './../../store/namespaces';
+
     export default {
         name: "Sidebar",
-        props : [
-            'src'
-        ],
         data () {
             return {
                 sideMenuitems: [
@@ -49,6 +50,14 @@
                 right: null,
             }
         },
+        methods: {
+            logout: function () {
+                // this.$router.push('login');
+            }
+        },
+        computed: {
+            ...mapState(USER, ['user'])
+        }
     }
 </script>
 

@@ -8,14 +8,15 @@
             <v-subheader>Select Item</v-subheader>
             <v-list-item-group v-model="item" color="primary">
                 <v-list-item
-                    v-for="({ name }, i) in this.listItems"
+                    v-for="(item, i) in this.listItems"
                     :key="i"
+                    @click="setStoreItem(item)"
                 >
                     <v-list-item-icon>
                         <v-icon >mdi-flag</v-icon>
                     </v-list-item-icon>
                     <v-list-item-content>
-                        <v-list-item-title v-text="name"></v-list-item-title>
+                        <v-list-item-title>{{ `${item._id} - ${item.value.Name}` }}</v-list-item-title>
                     </v-list-item-content>
                 </v-list-item>
             </v-list-item-group>
@@ -24,6 +25,9 @@
 </template>
 
 <script>
+    import { mapActions } from 'vuex';
+    import { ITEMS } from '../../store/namespaces';
+
     export default {
         name: "ChartItemList",
         props : {
@@ -35,6 +39,12 @@
         data: () => ({
             item: 1,
         }),
+        methods: {
+            ...mapActions(ITEMS, ['storeItem']),
+            setStoreItem: function (item) {
+                this.storeItem(item);
+            },
+        },
     }
 </script>
 

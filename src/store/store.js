@@ -1,6 +1,8 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
 import makeListItems from './modules/listItems';
+import makeUser from './modules/user';
+import makeCore from './modules/core';
 
 Vue.use(Vuex);
 export default function makeStore(initialConfig = {}) {
@@ -9,6 +11,8 @@ export default function makeStore(initialConfig = {}) {
         getters: {},
         modules: {
             items: makeListItems(initialConfig),
+            user: makeUser(initialConfig),
+            core: makeCore(initialConfig),
         },
         /**
          * In strict mode, whenever Vuex state is mutated outside of mutation handlers, an error will be
