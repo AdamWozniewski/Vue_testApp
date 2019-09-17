@@ -1,10 +1,20 @@
 <template>
-    <div></div>
+    <div>
+        <div v-if="!series.length">
+            <empty-card :text="text" />
+        </div>
+        <div v-else></div>
+    </div>
 </template>
 <script>
     import Highcharts from 'highcharts';
+    import EmptyCard from "../Core/EmptyCard";
+
     export default {
         name : 'ChartPieComponent',
+        components: {
+            EmptyCard,
+        },
         props : {
             series : {
                 type: Array,
@@ -13,7 +23,8 @@
         },
         data: function() {
             return {
-                target: undefined
+                target: undefined,
+                text: 'Pie diagram is empty'
             }
         },
         methods: {
@@ -26,7 +37,7 @@
                       type: 'pie'
                   },
                   title: {
-                      text: 'Browser market shares in January, 2018'
+                      text: 'Allocation Region'
                   },
                   tooltip: {
                       pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'

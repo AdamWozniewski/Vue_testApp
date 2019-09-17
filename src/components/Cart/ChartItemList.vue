@@ -48,11 +48,6 @@
         computed: {
             ...mapState(ITEMS, ['selectedItem']),
         },
-        watch: {
-            selectedItem: function (val) {
-                // console.log(val)
-            }
-        }
     }
 </script>
 

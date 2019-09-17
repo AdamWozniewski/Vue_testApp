@@ -1,5 +1,5 @@
-<template>s
-    <v-card height="100%" width="200px">
+<template>
+    <v-card height="100%">
         <v-navigation-drawer permanent>
             <v-list-item>
                 <v-list-item-content>

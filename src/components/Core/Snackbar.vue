@@ -2,11 +2,9 @@
     <v-snackbar
         v-model="show.visible"
         :color="show.color"
-        :multi-line="mode === 'multi-line'"
-        :right="x === 'right'"
+        right="right"
         :timeout="timeout"
-        :top="y === 'top'"
-        :vertical="mode === 'vertical'"
+        top="top"
     >
         {{ show.text }}
         <v-btn
@@ -36,6 +34,9 @@
         computed: {
             ...mapState(CORE, ['show']),
         },
+        created: function () {
+          global
+        },
         methods: {
             ...mapActions(CORE, ['storeShow']),
             closeSnackbar: function () {
@@ -44,14 +45,5 @@
                 });
             },
         },
-        watch: {
-            show: function (val) {
-                if(this.show.visible === false) {
-                    this.storeShow({
-                        visible: false,
-                    });
-                }
-            }
-        }
     }
 </script>

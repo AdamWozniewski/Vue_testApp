@@ -1,10 +1,20 @@
 <template>
-    <div></div>
+    <div>
+        <div v-if="!series.length">
+            <empty-card :text="text" />
+        </div>
+        <div v-else></div>
+    </div>
 </template>
 <script>
     import Highcharts from 'highcharts';
+    import EmptyCard from "../Core/EmptyCard";
+
     export default {
         name : 'CartComponent',
+        components: {
+            EmptyCard,
+        },
         props : {
             series : {
                 type: Array,
@@ -12,19 +22,16 @@
         },
         data: function() {
             return {
-                target: undefined
+                target: undefined,
+                text: 'Chart diagram is empty'
             }
         },
         methods: {
             createDiagram: function (series) {
                 this.target = Highcharts.chart(this.$el, {
                     title: {
-                        text: 'Monthly Average Temperature',
+                        text: 'Allocation Country',
                         x: -20 //center
-                    },
-                    subtitle: {
-                        text: 'Source: WorldClimate.com',
-                        x: -20
                     },
                     xAxis: {
                         categories: ['10', '20', '30', '40', '50', '60',

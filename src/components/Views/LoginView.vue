@@ -19,7 +19,7 @@
         </v-img>
         <v-card-title v-else>I'm a title</v-card-title>
 
-        <v-card-text>I'm card text</v-card-text>
+        <v-card-text>Write Your Login and password</v-card-text>
         <v-card-actions v-if="actions">
             <v-form v-model="valid">
                 <v-container>

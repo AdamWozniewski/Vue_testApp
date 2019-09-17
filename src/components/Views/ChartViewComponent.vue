@@ -8,8 +8,8 @@
             <chart-pie-component :series="initSeriesAllocationRegion"></chart-pie-component>
         </div>
         <chart-item-list :listItems="sidebarElements"></chart-item-list>
+<!--        <footer-component />-->
     </div>
-    <footer-component />
 </template>
 
 <script>
@@ -69,10 +69,17 @@
     .chartViewComponent__container {
         display: flex;
         flex-wrap: nowrap;
+        justify-content: space-between;
         height: 100%;
     }
+    .chartViewComponent__charts {
+        background-color: #fff;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
     .chartViewComponent__sidebar-container {
-        width: 30%;
         height: 100%;
     }
 </style>

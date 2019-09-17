@@ -1,17 +1,14 @@
 <template>
-    <v-card>
-        <v-footer
-                absolute
-                class="font-weight-medium"
+    <v-footer class="font-weight-medium footerComponent__wrapper"
+    >
+        <v-col
+            class="text-center"
+            cols="12"
         >
-            <v-col
-                    class="text-center"
-                    cols="12"
-            >
-                {{ new Date().getFullYear() }} — <strong>Vuetify</strong>
-            </v-col>
-        </v-footer>
-    </v-card>
+            {{ new Date().getFullYear() }} — <strong>Vuetify</strong>
+        </v-col>
+    </v-footer>
+
 </template>
 
 <script>
@@ -20,3 +17,8 @@
     }
 </script>
 
+<style scoped>
+    .footerComponent__wrapper {
+        width: 100%;
+    }
+</style>
