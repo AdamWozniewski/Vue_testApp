@@ -20,5 +20,8 @@
 <style scoped>
     .footerComponent__wrapper {
         width: 100%;
+        position: absolute;
+        bottom: 0;
+        z-index: 1;
     }
 </style>

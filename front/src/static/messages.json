@@ -25,7 +25,8 @@
       },
       "msg": {
         "loginSuccess": "Login successful",
-        "loginError": "Login Error"
+        "loginError": "Login Error",
+        "sourcesError": "Data downloading failed"
       },
       "text": {
         "close": "Close"

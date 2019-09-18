@@ -113,13 +113,11 @@
                     this.storeUser(data.login);
                     this.$router.push('dashboard');
                 })
-                .catch(() => {
-                    this.storeShow({
-                        visible: true,
-                        color: type.error,
-                        text: msg.loginError,
-                    })
-                });
+                .catch(() => this.storeShow({
+                    visible: true,
+                    color: type.error,
+                    text: msg.loginError,
+                }));
             },
             changeButtonDisabled: function () {
                 if (this.login.length && this.password.length) this.disabled = false;

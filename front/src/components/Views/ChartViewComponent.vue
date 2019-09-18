@@ -6,9 +6,9 @@
         <div class="chartViewComponent__charts">
             <cart-component :series="initSeriesAlocationCountry"></cart-component>
             <chart-pie-component :series="initSeriesAllocationRegion"></chart-pie-component>
+            <footer-component />
         </div>
         <chart-item-list :listItems="listItems"></chart-item-list>
-<!--        <footer-component />-->
     </div>
 </template>
 
@@ -23,7 +23,11 @@
     import Sidebar from './../Sidebar/Sidebar';
     import messages from './../../static/messages';
 
-    const { config } = messages;
+    const { config, components } = messages;
+    const {
+        type,
+        msg,
+    } = components.snackbar;
     const sourcesEndpoint = `${config.server}:${config.port}/${config.endpoints.sources}`;
     export default {
         name: 'ChartViewComponent',
@@ -64,7 +68,11 @@
             getDataSources: function () {
                 axios.get(sourcesEndpoint)
                     .then(({ data }) => this.storeItems(data))
-                    .catch(err => err);
+                    .catch(() => this.storeShow({
+                        visible: true,
+                        color: type.error,
+                        text: msg.sourcesError,
+                    }));
             }
         },
     }

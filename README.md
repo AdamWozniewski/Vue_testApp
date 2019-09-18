@@ -1,29 +1,25 @@
 # vue_test_app
 
-## Project setup
+## 1) Project setup
+#### front:
 ```
-npm install
+1) cd front
+2) npm i
 ```
-
-### Compiles and hot-reloads for development
+#### server:
+```
+1) cd server
+2) npm i
+```
+### 2) Compiles and hot-reloads for development
+#### server - run server
+```
+npm run dev
+```
+#### front - run project
 ```
 npm run serve
 ```
 
-### Compiles and minifies for production
-```
-npm run build
-```
 
-### Run your tests
-```
-npm run test
-```
 
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
