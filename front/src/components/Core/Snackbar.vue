@@ -12,7 +12,7 @@
             text
             @click="closeSnackbar"
         >
-            Close
+            {{ close }}
         </v-btn>
     </v-snackbar>
 </template>
@@ -20,7 +20,9 @@
 <script>
     import { mapState, mapActions } from 'vuex';
     import { CORE } from './../../store/namespaces';
+    import messages from './../../static/messages';
 
+    const { text } = messages.components.snackbar;
     export default {
         name: 'Snackbar',
         data () {
@@ -29,6 +31,7 @@
                 timeout: 2000,
                 x: 'right',
                 y: 'top',
+                close: text.close,
             }
         },
         computed: {

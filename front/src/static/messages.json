@@ -1,0 +1,51 @@
+{
+  "config": {
+    "server": "http://localhost",
+    "port": 3001,
+    "endpoints": {
+      "sources": "sources",
+      "auth": {
+        "authEndpoint": "auth",
+        "loginEndpoint": "login"
+      }
+    }
+  },
+  "components": {
+    "login": {
+      "submit": "Submit",
+      "title": "Data Viever",
+      "subtext": "Write Your Login and password",
+      "labelLogin": "Login",
+      "labelPassword": "Password"
+    },
+    "snackbar": {
+      "type": {
+        "success": "success",
+        "error": "error"
+      },
+      "msg": {
+        "loginSuccess": "Login successful",
+        "loginError": "Login Error"
+      },
+      "text": {
+        "close": "Close"
+      }
+    },
+    "sidebar": {
+      "title": "Data chart",
+      "logout": "Logout"
+    },
+    "chartPie": {
+      "diagramEmpty": "Pie diagram is empty",
+      "title": "Allocation Country"
+    },
+    "chart": {
+      "diagramEmpty": "Pie diagram is empty",
+      "title": "Chart diagram is empty",
+      "value": "Value"
+    },
+    "listItem": {
+      "title": "Select Item"
+    }
+  }
+}

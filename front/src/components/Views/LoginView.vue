@@ -1,26 +1,20 @@
 <template>
     <v-card
         class="mx-auto"
-        :flat="flat"
-        :loading="loading"
-        :outlined="outlined"
-        :elevation="elevation"
-        :raised="raised"
-        :width="width"
-        :height="height"
+        elevation="10"
+        width="444"
+        height="undefined"
     >
         <v-img
-            v-if="media"
             class="white--text"
             height="200px"
             src="https://cdn.vuetifyjs.com/images/cards/docks.jpg"
         >
-        <v-card-title class="align-end fill-height">Data Viever</v-card-title>
+            <v-card-title class="align-end fill-height">{{ message.title }}</v-card-title>
         </v-img>
-        <v-card-title v-else>I'm a title</v-card-title>
 
-        <v-card-text>Write Your Login and password</v-card-text>
-        <v-card-actions v-if="actions">
+        <v-card-text>{{ message.subtext }}</v-card-text>
+        <v-card-actions>
             <v-form v-model="valid">
                 <v-container>
                     <v-row>
@@ -28,7 +22,7 @@
                             <v-text-field
                                 v-model="login"
                                 @input="changeButtonDisabled"
-                                label="Login"
+                                :label="message.labelLogin"
                                 required
                             ></v-text-field>
                         </v-col>
@@ -36,7 +30,7 @@
                             <v-text-field
                                 v-model="password"
                                 @input="changeButtonDisabled"
-                                label="Password"
+                                :label="message.labelPassword"
                                 required
                                 type="password"
                             ></v-text-field>
@@ -52,7 +46,7 @@
                                 @click="submit"
                                 :disabled="disabled"
                             >
-                                submit
+                                {{ message.submit }}
                             </v-btn>
                         </v-col>
                     </v-row>
@@ -67,7 +61,25 @@
     import { mapActions } from 'vuex';
     import axios from 'axios';
     import { CORE, USER } from './../../store/namespaces';
+    import messages from './../../static/messages.json';
 
+    const {
+        login,
+        snackbar,
+    } = messages.components;
+    const {
+        title,
+        submit,
+        subtext,
+        labelLogin,
+        labelPassword,
+    } = login;
+    const {
+        type,
+        msg,
+    } = snackbar;
+    const { config } = messages;
+    const loginEndpoint = `${config.server}:${config.port}/${config.endpoints.auth.authEndpoint}/${config.endpoints.auth.loginEndpoint}`;
     export default {
         name: "LoginView",
         data: () => ({
@@ -76,37 +88,37 @@
             password: '',
             disabled: true,
 
-            flat: false,
-            media: true,
-            loading: false,
-            actions: true,
-            outlined: false,
-            elevation: 10,
-            raised: false,
-            width: 344,
-            height: undefined,
+            message: {
+                title,
+                submit,
+                subtext,
+                labelLogin,
+                labelPassword,
+            },
         }),
         methods: {
             ...mapActions(CORE, ['storeShow']),
             ...mapActions(USER, ['storeIsAuth', 'storeUser']),
             submit () {
-                axios.post('http://localhost:3001/auth/login', {
+                axios.post(loginEndpoint, {
                     login: this.login,
                     password: this.password,
-                });
-                if (this.login === 'adam' && this.password === '123') {
+                }).then(({ data }) => {
                     this.storeShow({
                         visible: true,
-                        color: 'success',
-                        text: 'Login successful',
+                        color: type.success,
+                        text: msg.loginSuccess,
                     });
                     this.storeIsAuth(true);
-                    this.storeUser(this.login);
+                    this.storeUser(data.login);
                     this.$router.push('dashboard');
-                } else this.storeShow({
-                    visible: true,
-                    color: 'error',
-                    text: 'Login Error',
+                })
+                .catch(() => {
+                    this.storeShow({
+                        visible: true,
+                        color: type.error,
+                        text: msg.loginError,
+                    })
                 });
             },
             changeButtonDisabled: function () {

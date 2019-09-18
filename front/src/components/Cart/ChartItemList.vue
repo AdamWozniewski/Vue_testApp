@@ -5,7 +5,7 @@
         tile
     >
         <v-list rounded>
-            <v-subheader>Select Item</v-subheader>
+            <v-subheader>{{ text }}</v-subheader>
             <v-list-item-group v-model="item" color="primary">
                 <v-list-item
                     v-for="(item, i) in this.listItems"
@@ -27,7 +27,9 @@
 <script>
     import { mapActions, mapState } from 'vuex';
     import { ITEMS } from './../../store/namespaces';
+    import messages from './../../static/messages';
 
+    const { listItem } = messages.components;
     export default {
         name: "ChartItemList",
         props : {
@@ -38,6 +40,7 @@
         },
         data: () => ({
             item: 1,
+            text: listItem.title,
         }),
         methods: {
             ...mapActions(ITEMS, ['storeItem']),

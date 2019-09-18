@@ -1,7 +1,7 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
-import LoginView from '../components/Views/LoginView';
-import ChartViewComponent from "../components/Views/ChartViewComponent";
+import LoginView from './../components/Views/LoginView';
+import ChartViewComponent from './../components/Views/ChartViewComponent';
 
 const routes = [
     {

@@ -1,7 +1,7 @@
 <template>
     <div>
         <div v-if="!series.length">
-            <empty-card :text="text" />
+            <empty-card :text="text"/>
         </div>
         <div v-else></div>
     </div>
@@ -9,7 +9,9 @@
 <script>
     import Highcharts from 'highcharts';
     import EmptyCard from "../Core/EmptyCard";
+    import messages from './../../static/messages';
 
+    const { chartPie } = messages.components;
     export default {
         name : 'ChartPieComponent',
         components: {
@@ -24,7 +26,7 @@
         data: function() {
             return {
                 target: undefined,
-                text: 'Pie diagram is empty'
+                text: chartPie.diagramEmpty,
             }
         },
         methods: {
@@ -37,7 +39,7 @@
                       type: 'pie'
                   },
                   title: {
-                      text: 'Allocation Country'
+                      text: chartPie.diagramEmpty
                   },
                   tooltip: {
                       pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'

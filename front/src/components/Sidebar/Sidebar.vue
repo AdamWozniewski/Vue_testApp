@@ -4,7 +4,7 @@
             <v-list-item>
                 <v-list-item-content>
                     <v-list-item-title class="title">
-                        Data chart
+                        {{ this.text.sidebar.title }}
                     </v-list-item-title>
                     <v-list-item-subtitle>
                         {{ this.login }}
@@ -35,15 +35,20 @@
 <script>
     import { mapState, mapActions } from 'vuex';
     import { USER, CORE } from './../../store/namespaces';
+    import messages from './../../static/messages';
 
+    const { sidebar } = messages.components;
     export default {
         name: "Sidebar",
         data () {
             return {
                 sideMenuitems: [
-                    { title: 'Logout', icon: 'mdi-cancel' },
+                    { title: sidebar.logout, icon: 'mdi-cancel' },
                 ],
                 right: null,
+                text: {
+                    sidebar
+                }
             }
         },
         methods: {

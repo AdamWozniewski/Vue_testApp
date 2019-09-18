@@ -9,7 +9,9 @@
 <script>
     import Highcharts from 'highcharts';
     import EmptyCard from "../Core/EmptyCard";
+    import messages from './../../static/messages';
 
+    const { chart } = messages.components;
     export default {
         name : 'CartComponent',
         components: {
@@ -23,37 +25,37 @@
         data: function() {
             return {
                 target: undefined,
-                text: 'Chart diagram is empty'
+                text: chart.diagramEmpty,
             }
         },
         methods: {
             createDiagram: function (series) {
                 this.target = Highcharts.chart(this.$el, {
                     title: {
-                        text: 'Performance',
-                        x: -20 //center
+                        text: chart.title,
+                        x: -20,
                     },
                     xAxis: {
                         categories: series.map(({ name }) => name),
                     },
                     yAxis: {
                         title: {
-                            text: 'Value'
+                            text: chart.value,
                         },
                         plotLines: [{
                             value: 0,
                             width: 1,
-                            color: '#808080'
+                            color: '#808080',
                         }]
                     },
                     tooltip: {
-                        valueSuffix: 'Y'
+                        valueSuffix: 'Y',
                     },
                     legend: {
                         layout: 'vertical',
                         align: 'right',
                         verticalAlign: 'middle',
-                        borderWidth: 0
+                        borderWidth: 0,
                     },
                     series,
                 });

@@ -18,11 +18,13 @@
     import CartComponent from '../Cart/CartComponent';
     import ChartPieComponent from '../Cart/ChartPieComponent';
     import ChartItemList from '../Cart/ChartItemList';
-    import FooterComponent from "./../Core/FooterComponent";
+    import FooterComponent from './../Core/FooterComponent';
     import { ITEMS, USER } from './../../store/namespaces';
-    import Sidebar from "./../Sidebar/Sidebar";
-    import data from "./../../static/data";
+    import Sidebar from './../Sidebar/Sidebar';
+    import messages from './../../static/messages';
 
+    const { config } = messages;
+    const sourcesEndpoint = `${config.server}:${config.port}/${config.endpoints.sources}`;
     export default {
         name: 'ChartViewComponent',
         components: {
@@ -60,7 +62,7 @@
         methods: {
             ...mapActions(ITEMS, ['storeItems']),
             getDataSources: function () {
-                axios.get('http://localhost:3001/sources')
+                axios.get(sourcesEndpoint)
                     .then(({ data }) => this.storeItems(data))
                     .catch(err => err);
             }
